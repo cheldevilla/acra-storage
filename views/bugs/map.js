@@ -1,5 +1,5 @@
 function(doc) {
-    if (doc.SIGNATURE && doc.SIGNATURE.digest && (typeof doc.APP_VERSION_CODE !== 'undefined') && doc.USER_CRASH_DATE) {
+    if (doc.SIGNATURE && doc.SIGNATURE.digest && (typeof doc.APP_VERSION_CODE !== 'undefined') && doc.USER_APP_START_DATE) {
         // This is a report, compute stats
         var key = [ doc.APP_VERSION_CODE, doc.SIGNATURE.digest ];
         if (doc.SIGNATURE.rootCause) {
@@ -7,11 +7,8 @@ function(doc) {
         } else {
             key.push("");
         }
-        var reportDate = new Date(doc.USER_CRASH_DATE);
-        if(isNaN(reportDate.getTime())) {
-            reportDate = doc.timestamp;
-        }
-        var value = { latest: reportDate.getTime(), count: 1 };
+        var reportDate = new Date(doc.USER_APP_START_DATE);
+        var value = { latest: reportDate, count: 1 };
         emit(key, value);
     } else if (doc.type == "solved_signature") {
         // This is a "solved" marker, mark it as solved

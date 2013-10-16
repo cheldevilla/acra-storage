@@ -9,10 +9,7 @@ function(doc) {
         } else {
             key.push("");
         }
-        var reportDate = new Date(doc.USER_CRASH_DATE);
-        if(isNaN(reportDate.getTime())) {
-            reportDate = doc.timestamp;
-        }
+        var reportDate = new Date(doc.USER_APP_START_DATE);
         key.push(reportDate);
         emit(key,result);
     }

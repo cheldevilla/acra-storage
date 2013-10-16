@@ -74,7 +74,7 @@ function(doc,req) {
 
     data.requestHeaders = req.headers;
 	message = "OK";
-	return [ data, message];
+	return [data, message];
 }
 
 var addReportSignature = function(report) {
